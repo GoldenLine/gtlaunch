@@ -1,12 +1,13 @@
 #/usr/bin/env python
 
+import argparse
 import json
 import os
 import subprocess
 
 
-def run():
-    with open('gtlaunch.json', 'r') as fp:
+def run(args):
+    with open(os.path.expanduser(args.config), 'r') as fp:
         config = json.load(fp)
     project = config['test']
     args = ['gnome-terminal', '--maximize']
@@ -22,4 +23,10 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-c', '--config', metavar='FILE', help="path to configuration file",
+        default="~/gtlaunch.json",
+    )
+    args = parser.parse_args()
+    run(args)
