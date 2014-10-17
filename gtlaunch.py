@@ -7,6 +7,8 @@ import subprocess
 
 
 def run(options):
+    if options.verbose:
+        print("Reading config file '{}'...".format(options.config))
     try:
         with open(os.path.expanduser(options.config), 'r') as fp:
             config = json.load(fp)
@@ -30,6 +32,8 @@ def run(options):
         args.append(tab_option)
         args.extend(['--title', tab['title']])
         args.extend(['--command', command])
+    if options.verbose:
+        print("Running '{}'...".format(' '.join(args)))
     return subprocess.Popen(args)
 
 
@@ -42,6 +46,10 @@ if __name__ == "__main__":
     parser.add_argument(
         '-p', '--project', metavar='PROJECT', help="project label",
         required=True,
+    )
+    parser.add_argument(
+        '-v', '--verbose', help="verbose output",
+        action='store_true',
     )
     args = parser.parse_args()
     run(args)
