@@ -6,20 +6,20 @@ import os
 import subprocess
 
 
-def run(args):
+def run(options):
     try:
-        with open(os.path.expanduser(args.config), 'r') as fp:
+        with open(os.path.expanduser(options.config), 'r') as fp:
             config = json.load(fp)
     except IOError:
-        print("Config file '{}' not found.".format(args.config))
+        print("Config file '{}' not found.".format(options.config))
         return
     except ValueError:
-        print("Config file '{}' is invalid JSON.".format(args.config))
+        print("Config file '{}' is invalid JSON.".format(options.config))
         return
     try:
-        project = config[args.project]
+        project = config[options.project]
     except KeyError:
-        print("Project '{}' not found.".format(args.project))
+        print("Project '{}' not found.".format(options.project))
         return
     args = ['gnome-terminal', '--maximize']
     args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
