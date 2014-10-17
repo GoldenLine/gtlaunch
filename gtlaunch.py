@@ -9,7 +9,7 @@ import subprocess
 def run(args):
     with open(os.path.expanduser(args.config), 'r') as fp:
         config = json.load(fp)
-    project = config['test']
+    project = config[args.project]
     args = ['gnome-terminal', '--maximize']
     args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
     for idx, tab in enumerate(project['tabs']):
@@ -27,6 +27,10 @@ if __name__ == "__main__":
     parser.add_argument(
         '-c', '--config', metavar='FILE', help="path to configuration file",
         default="~/gtlaunch.json",
+    )
+    parser.add_argument(
+        '-p', '--project', metavar='PROJECT', help="project label",
+        required=True,
     )
     args = parser.parse_args()
     run(args)
