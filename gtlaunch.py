@@ -7,9 +7,20 @@ import subprocess
 
 
 def run(args):
-    with open(os.path.expanduser(args.config), 'r') as fp:
-        config = json.load(fp)
-    project = config[args.project]
+    try:
+        with open(os.path.expanduser(args.config), 'r') as fp:
+            config = json.load(fp)
+    except IOError:
+        print("Config file '{}' not found.".format(args.config))
+        return
+    except ValueError:
+        print("Config file '{}' is invalid JSON.".format(args.config))
+        return
+    try:
+        project = config[args.project]
+    except KeyError:
+        print("Project '{}' not found.".format(args.project))
+        return
     args = ['gnome-terminal', '--maximize']
     args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
     for idx, tab in enumerate(project['tabs']):
