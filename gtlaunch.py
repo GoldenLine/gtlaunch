@@ -1,5 +1,6 @@
 #/usr/bin/env python
 
+import os
 import subprocess
 
 config = {
@@ -27,7 +28,7 @@ config = {
 def run():
     project = config['test']
     args = ['gnome-terminal', '--maximize']
-    args.extend(['--working-directory', project['cwd']])
+    args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
     for idx, tab in enumerate(project['tabs']):
         tab_option = '--tab' if idx == 0 else '--tab-with-profile=Default'
         prefix = project.get('prefix', 'true')
