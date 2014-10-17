@@ -1,31 +1,13 @@
 #/usr/bin/env python
 
+import json
 import os
 import subprocess
 
-config = {
-    'test': {
-        'prefix': 'workon test',
-        'cwd': '~/Development',
-        'tabs': [
-            {
-                'title': 'editor',
-                'command': 'vim',
-            },
-            {
-                'title': 'python',
-                'command': 'python',
-            },
-            {
-                'title': 'git',
-                'command': 'git status',
-            },
-        ],
-    },
-}
-
 
 def run():
+    with open('gtlaunch.json', 'r') as fp:
+        config = json.load(fp)
     project = config['test']
     args = ['gnome-terminal', '--maximize']
     args.extend(['--working-directory', os.path.expanduser(project['cwd'])])

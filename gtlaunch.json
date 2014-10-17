@@ -1,0 +1,20 @@
+{
+    "test": {
+        "prefix": "workon test",
+        "cwd": "~/Development",
+        "tabs": [
+            {
+                "command": "vim",
+                "title": "editor"
+            },
+            {
+                "command": "python",
+                "title": "python"
+            },
+            {
+                "command": "git status",
+                "title": "git"
+            }
+        ]
+    }
+}
