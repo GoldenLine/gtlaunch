@@ -44,12 +44,11 @@ if __name__ == "__main__":
         default="~/gtlaunch.json",
     )
     parser.add_argument(
-        '-p', '--project', metavar='PROJECT', help="project label",
-        required=True,
-    )
-    parser.add_argument(
         '-v', '--verbose', help="verbose output",
         action='store_true',
+    )
+    parser.add_argument(
+        dest='project', metavar='PROJECT', help="project label",
     )
     args = parser.parse_args()
     run(args)
