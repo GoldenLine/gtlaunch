@@ -57,7 +57,7 @@ class Launcher(object):
         return subprocess.Popen(args)
 
 
-if __name__ == "__main__":
+def run():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-c', '--config', metavar='FILE', help="path to configuration file",
@@ -77,3 +77,7 @@ if __name__ == "__main__":
     except LauncherError as e:
         print("Launcher error: {}".format(e))
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    run()
