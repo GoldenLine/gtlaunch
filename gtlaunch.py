@@ -3,38 +3,53 @@
 import argparse
 import json
 import os
+import sys
 import subprocess
 
 
-def run(options):
-    if options.verbose:
-        print("Reading config file '{}'...".format(options.config))
-    try:
-        with open(os.path.expanduser(options.config), 'r') as fp:
-            config = json.load(fp)
-    except IOError:
-        print("Config file '{}' not found.".format(options.config))
-        return
-    except ValueError:
-        print("Config file '{}' is invalid JSON.".format(options.config))
-        return
-    try:
-        project = config[options.project]
-    except KeyError:
-        print("Project '{}' not found.".format(options.project))
-        return
-    args = ['gnome-terminal', '--maximize']
-    args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
-    for idx, tab in enumerate(project['tabs']):
-        tab_option = '--tab' if idx == 0 else '--tab-with-profile=Default'
-        prefix = project.get('prefix', 'true')
-        command = "zsh -is eval '{} && {}'".format(prefix, tab['command'])
-        args.append(tab_option)
-        args.extend(['--title', tab['title']])
-        args.extend(['--command', command])
-    if options.verbose:
-        print("Running '{}'...".format(' '.join(args)))
-    return subprocess.Popen(args)
+class LauncherError(Exception):
+    pass
+
+
+class Launcher(object):
+    def __init__(self,  options):
+        self.options = options
+        self.config = {}
+        self.project = None
+        self.process_options(options)
+
+    def process_options(self, options):
+        if options.verbose:
+            print("Reading config file '{}'...".format(options.config))
+        try:
+            with open(os.path.expanduser(options.config), 'r') as fp:
+                self.config = json.load(fp)
+        except IOError:
+            raise LauncherError("Config file '{}' not found.".format(options.config))
+        except ValueError:
+            raise LauncherError("Config file '{}' is invalid JSON.".format(options.config))
+        try:
+            self.project = self.config[options.project]
+        except KeyError:
+            raise LauncherError("Project '{}' not found.".format(options.project))
+
+    def build_args(self, project):
+        args = ['gnome-terminal', '--maximize']
+        args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
+        for idx, tab in enumerate(project['tabs']):
+            tab_option = '--tab' if idx == 0 else '--tab-with-profile=Default'
+            prefix = project.get('prefix', 'true')
+            command = "zsh -is eval '{} && {}'".format(prefix, tab['command'])
+            args.append(tab_option)
+            args.extend(['--title', tab['title']])
+            args.extend(['--command', command])
+        return args
+
+    def run(self):
+        args = self.build_args(self.project)
+        if self.options.verbose:
+            print("Running '{}'...".format(' '.join(args)))
+        return subprocess.Popen(args)
 
 
 if __name__ == "__main__":
@@ -51,4 +66,9 @@ if __name__ == "__main__":
         dest='project', metavar='PROJECT', help="project label",
     )
     args = parser.parse_args()
-    run(args)
+    try:
+        launcher = Launcher(args)
+        launcher.run()
+    except LauncherError as e:
+        print("Launcher error: {}".format(e))
+        sys.exit(1)
