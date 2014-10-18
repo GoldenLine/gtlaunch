@@ -53,7 +53,7 @@ class Launcher(object):
     def run(self):
         args = self.build_args(self.project)
         if self.options.verbose:
-            print("Running '{}'...".format(' '.join(args)))
+            print("Running \"{}\"".format(' \\\n\t'.join(args)))
         return subprocess.Popen(args)
 
 
