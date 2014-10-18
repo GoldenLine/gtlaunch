@@ -12,11 +12,12 @@ class LauncherError(Exception):
 
 
 class Launcher(object):
-    def __init__(self,  options):
+    def __init__(self,  options, lazy=False):
         self.options = options
         self.config = {}
         self.project = None
-        self.process_options(options)
+        if not lazy:
+            self.process_options(options)
 
     def process_options(self, options):
         if options.verbose:
