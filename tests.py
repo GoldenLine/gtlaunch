@@ -11,18 +11,19 @@ class MockOptions(object):
 
 
 class LauncherTestCase(unittest.TestCase):
+    def setUp(self):
+        self.options = MockOptions()
+
     def test_lazy_init(self):
-        options = MockOptions()
-        launcher = Launcher(options, lazy=True)
+        launcher = Launcher(self.options, lazy=True)
         self.assertIsNone(launcher.project)
 
     def test_args_maximize(self):
-        options = MockOptions()
         project = {
             'cwd': '~',
             'tabs': [],
         }
-        launcher = Launcher(options, lazy=True)
+        launcher = Launcher(self.options, lazy=True)
         args = launcher.build_args(project)
         self.assertIn('--maximize', args)
 
