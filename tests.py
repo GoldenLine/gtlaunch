@@ -42,6 +42,28 @@ class LauncherTestCase(unittest.TestCase):
         args = self.launcher.build_args(project)
         self.assertIn('--maximize', args)
 
+    def test_tab_no_title(self):
+        project = {
+            'cwd': '/home/test',
+            'tabs': [{
+                'command': 'ls -la',
+            }],
+        }
+        args = self.launcher.build_args(project)
+        self.assertNotIn('--title', args)
+
+    def test_tab_title(self):
+        project = {
+            'cwd': '/home/test',
+            'tabs': [{
+                'command': 'ls -la',
+                'title': 'list stuff',
+            }],
+        }
+        args = self.launcher.build_args(project)
+        idx = args.index('--title')
+        self.assertEqual(args[idx + 1], 'list stuff')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -45,7 +45,8 @@ class Launcher(object):
             prefix = project.get('prefix', 'true')
             command = "zsh -is eval '{} && {}'".format(prefix, tab['command'])
             args.append(tab_option)
-            args.extend(['--title', tab['title']])
+            if 'title' in tab:
+                args.extend(['--title', tab['title']])
             args.extend(['--command', command])
         return args
 
