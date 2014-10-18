@@ -18,6 +18,24 @@ class LauncherTestCase(unittest.TestCase):
         launcher = Launcher(self.options, lazy=True)
         self.assertIsNone(launcher.project)
 
+    def test_no_cwd(self):
+        project = {
+            'tabs': [],
+        }
+        launcher = Launcher(self.options, lazy=True)
+        args = launcher.build_args(project)
+        self.assertNotIn('--working-directory', args)
+
+    def test_cwd(self):
+        project = {
+            'cwd': '/home/test',
+            'tabs': [],
+        }
+        launcher = Launcher(self.options, lazy=True)
+        args = launcher.build_args(project)
+        idx = args.index('--working-directory')
+        self.assertEqual(args[idx + 1], project['cwd'])
+
     def test_args_maximize(self):
         project = {
             'cwd': '~',

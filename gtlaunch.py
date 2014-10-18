@@ -36,7 +36,10 @@ class Launcher(object):
 
     def build_args(self, project):
         args = ['gnome-terminal', '--maximize']
-        args.extend(['--working-directory', os.path.expanduser(project['cwd'])])
+        if 'cwd' in project:
+            args.extend([
+                '--working-directory', os.path.expanduser(project['cwd']),
+            ])
         for idx, tab in enumerate(project['tabs']):
             tab_option = '--tab' if idx == 0 else '--tab-with-profile=Default'
             prefix = project.get('prefix', 'true')
