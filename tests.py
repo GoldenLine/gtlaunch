@@ -13,17 +13,16 @@ class MockOptions(object):
 class LauncherTestCase(unittest.TestCase):
     def setUp(self):
         self.options = MockOptions()
+        self.launcher = Launcher(self.options, lazy=True)
 
     def test_lazy_init(self):
-        launcher = Launcher(self.options, lazy=True)
-        self.assertIsNone(launcher.project)
+        self.assertIsNone(self.launcher.project)
 
     def test_no_cwd(self):
         project = {
             'tabs': [],
         }
-        launcher = Launcher(self.options, lazy=True)
-        args = launcher.build_args(project)
+        args = self.launcher.build_args(project)
         self.assertNotIn('--working-directory', args)
 
     def test_cwd(self):
@@ -31,8 +30,7 @@ class LauncherTestCase(unittest.TestCase):
             'cwd': '/home/test',
             'tabs': [],
         }
-        launcher = Launcher(self.options, lazy=True)
-        args = launcher.build_args(project)
+        args = self.launcher.build_args(project)
         idx = args.index('--working-directory')
         self.assertEqual(args[idx + 1], project['cwd'])
 
@@ -41,8 +39,7 @@ class LauncherTestCase(unittest.TestCase):
             'cwd': '~',
             'tabs': [],
         }
-        launcher = Launcher(self.options, lazy=True)
-        args = launcher.build_args(project)
+        args = self.launcher.build_args(project)
         self.assertIn('--maximize', args)
 
 
