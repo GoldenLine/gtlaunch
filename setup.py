@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name='gtlaunch',
-    version='0.1.1',
+    version='0.1.2',
     description='Gnome Terminal launcher',
     long_description=read('README.rst'),
     author='Zbigniew Siciarz',
