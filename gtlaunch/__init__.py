@@ -29,10 +29,11 @@ class Launcher(object):
             raise LauncherError("Config file '{}' not found.".format(options.config))
         except ValueError:
             raise LauncherError("Config file '{}' is invalid JSON.".format(options.config))
-        try:
-            self.project = self.config[options.project]
-        except KeyError:
-            raise LauncherError("Project '{}' not found.".format(options.project))
+        if options.project:
+            try:
+                self.project = self.config[options.project]
+            except KeyError:
+                raise LauncherError("Project '{}' not found.".format(options.project))
 
     def build_args(self, project):
         args = ['gnome-terminal', '--maximize']
@@ -51,6 +52,9 @@ class Launcher(object):
         return args
 
     def run(self):
+        if self.options.list:
+            print("\n".join(sorted(self.config.keys())))
+            return
         args = self.build_args(self.project)
         if self.options.verbose:
             print("Running \"{}\"".format(' \\\n\t'.join(args)))
@@ -67,8 +71,12 @@ def run():
         '-v', '--verbose', help="verbose output",
         action='store_true',
     )
-    parser.add_argument(
-        dest='project', metavar='PROJECT', help="project label",
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(
+        '-l', '--list', help="list all projects", action='store_true',
+    )
+    group.add_argument(
+        dest='project', metavar='PROJECT', help="project label", nargs='?',
     )
     args = parser.parse_args()
     try:
