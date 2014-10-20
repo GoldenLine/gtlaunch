@@ -50,7 +50,8 @@ class LauncherTestCase(unittest.TestCase):
             }],
         }
         args = self.launcher.build_args(project)
-        self.assertNotIn('--title', args)
+        idx = args.index('--title')
+        self.assertEqual(args[idx + 1], project['tabs'][0]['command'])
 
     def test_tab_title(self):
         project = {
