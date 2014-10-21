@@ -1,36 +1,15 @@
-#!/usr/bin/env python
-
-import argparse
-import sys
-
-from .launcher import Launcher, LauncherError
+__version_info__ = (0, 1, 3, 'final', 0)
 
 
-def run():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-c', '--config', metavar='FILE', help="path to configuration file",
-        default="~/gtlaunch.json",
-    )
-    parser.add_argument(
-        '-v', '--verbose', help="verbose output",
-        action='store_true',
-    )
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument(
-        '-l', '--list', help="list all projects", action='store_true',
-    )
-    group.add_argument(
-        dest='project', metavar='PROJECT', help="project label", nargs='?',
-    )
-    args = parser.parse_args()
-    try:
-        launcher = Launcher(args)
-        launcher.run()
-    except LauncherError as e:
-        print("Launcher error: {}".format(e))
-        sys.exit(1)
+def get_version():
+    version = '%s.%s' % (__version_info__[0], __version_info__[1])
+    if __version_info__[2]:
+        version = '%s.%s' % (version, __version_info__[2])
+    if __version_info__[3] != 'final':
+        version = '%s%s' % (version, __version_info__[3])
+        if __version_info__[4]:
+            version = '%s%s' % (version, __version_info__[4])
+    return version
 
 
-if __name__ == "__main__":
-    run()
+__version__ = get_version()

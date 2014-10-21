@@ -1,12 +1,14 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
 setup(
     name='gtlaunch',
-    version='0.1.2',
+    version=__import__('gtlaunch').__version__,
     description='Gnome Terminal launcher',
     long_description=read('README.rst'),
     author='Zbigniew Siciarz',
@@ -19,7 +21,7 @@ setup(
     test_suite='tests',
     entry_points={
         'console_scripts': [
-            'gtlaunch = gtlaunch:run',
+            'gtlaunch = gtlaunch.main:run',
         ],
     },
     classifiers=[
