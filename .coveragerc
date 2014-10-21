@@ -1,0 +1,4 @@
+[report]
+omit =
+    gtlaunch/__init__.py
+    gtlaunch/main.py
