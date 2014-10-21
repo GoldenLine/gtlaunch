@@ -1,6 +1,6 @@
 import unittest
 
-from gtlaunch import Launcher
+from gtlaunch.launcher import Launcher
 
 
 class MockOptions(object):
