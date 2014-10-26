@@ -67,7 +67,6 @@ class LauncherTestCase(unittest.TestCase):
 
     def test_args_maximize(self):
         project = {
-            'cwd': '~',
             'tabs': [],
         }
         args = self.launcher.build_args(project)
@@ -75,7 +74,6 @@ class LauncherTestCase(unittest.TestCase):
 
     def test_tab_no_title(self):
         project = {
-            'cwd': '/home/test',
             'tabs': [{
                 'command': 'ls -la',
             }],
@@ -85,7 +83,6 @@ class LauncherTestCase(unittest.TestCase):
 
     def test_tab_title(self):
         project = {
-            'cwd': '/home/test',
             'tabs': [{
                 'command': 'ls -la',
                 'title': 'list stuff',
