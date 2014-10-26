@@ -28,8 +28,8 @@ class LauncherTestCase(unittest.TestCase):
         self.assertIsNone(self.launcher.project)
 
     def test_no_config_file(self):
+        self.options.config = 'thisdoesnotexist.json'
         with self.assertRaisesRegex(LauncherError, "Config file .* not found"):
-            self.options.config = 'thisdoesnotexist.json'
             self.launcher.process_options(self.options)
 
     def test_no_cwd(self):
