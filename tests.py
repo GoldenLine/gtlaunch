@@ -35,7 +35,8 @@ class LauncherTestCase(unittest.TestCase):
 
     def test_invalid_config_file(self):
         with tempfile.NamedTemporaryFile() as temp_file:
-            temp_file.write(b"{")
+            temp_file.write(b'{')
+            temp_file.seek(0)
             self.options.config = temp_file.name
             with self.assertRaisesRegex(LauncherError, "Config file '.*' is invalid JSON."):
                 self.launcher.process_options(self.options)
