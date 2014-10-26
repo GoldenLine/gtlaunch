@@ -72,6 +72,13 @@ class LauncherTestCase(unittest.TestCase):
         args = self.launcher.build_args(project)
         self.assertIn('--maximize', args)
 
+    def test_simple_tabs(self):
+        project = {
+            'tabs': ['vim', 'git status'],
+        }
+        args = self.launcher.build_args(project)
+        self.assertArgumentEqual(args, '--title', 'vim')
+
     def test_tab_no_title(self):
         project = {
             'tabs': [{
