@@ -14,7 +14,7 @@ gtlaunch
     :alt: Supported Python versions
 
 .. image:: https://pypip.in/wheel/gtlaunch/badge.svg
-        :target: https://pypi.python.org/pypi/gtlaunch/
+    :target: https://pypi.python.org/pypi/gtlaunch/
     :alt: Wheel Status
 
 .. image:: https://travis-ci.org/zsiciarz/gtlaunch.svg?branch=master
