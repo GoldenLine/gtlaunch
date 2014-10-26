@@ -15,6 +15,10 @@ class LauncherTestCase(unittest.TestCase):
         self.options = MockOptions()
         self.launcher = Launcher(self.options, lazy=True)
 
+    def assertArgumentEqual(self, args, name, value):
+        idx = args.index(name)
+        self.assertEqual(args[idx + 1], value)
+
     def test_lazy_init(self):
         self.assertIsNone(self.launcher.project)
 
@@ -31,8 +35,7 @@ class LauncherTestCase(unittest.TestCase):
             'tabs': [],
         }
         args = self.launcher.build_args(project)
-        idx = args.index('--working-directory')
-        self.assertEqual(args[idx + 1], project['cwd'])
+        self.assertArgumentEqual(args, '--working-directory', project['cwd'])
 
     def test_args_maximize(self):
         project = {
@@ -50,8 +53,7 @@ class LauncherTestCase(unittest.TestCase):
             }],
         }
         args = self.launcher.build_args(project)
-        idx = args.index('--title')
-        self.assertEqual(args[idx + 1], project['tabs'][0]['command'])
+        self.assertArgumentEqual(args, '--title', project['tabs'][0]['command'])
 
     def test_tab_title(self):
         project = {
@@ -62,8 +64,7 @@ class LauncherTestCase(unittest.TestCase):
             }],
         }
         args = self.launcher.build_args(project)
-        idx = args.index('--title')
-        self.assertEqual(args[idx + 1], 'list stuff')
+        self.assertArgumentEqual(args, '--title', 'list stuff')
 
 
 if __name__ == '__main__':
