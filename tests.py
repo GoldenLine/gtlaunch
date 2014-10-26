@@ -1,6 +1,11 @@
+import sys
 import unittest
 
 from gtlaunch.launcher import Launcher, LauncherError
+
+# fix for Python 2.7 not having assertRaisesRegex in unittest
+if sys.version_info[:2] == (2, 7):
+    unittest.TestCase.assertRaisesRegex = unittest.TestCase.assertRaisesRegexp
 
 
 class MockOptions(object):
