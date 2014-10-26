@@ -41,6 +41,15 @@ class LauncherTestCase(unittest.TestCase):
             with self.assertRaisesRegex(LauncherError, "Config file '.*' is invalid JSON."):
                 self.launcher.process_options(self.options)
 
+    def test_project_not_found_in_config(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(b'{"project":[]}')
+            temp_file.seek(0)
+            self.options.config = temp_file.name
+            self.options.project = "test_project"
+            with self.assertRaisesRegex(LauncherError, "Project '.*' not found"):
+                self.launcher.process_options(self.options)
+
     def test_no_cwd(self):
         project = {
             'tabs': [],
