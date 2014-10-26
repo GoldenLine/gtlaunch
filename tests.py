@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 
 from gtlaunch.launcher import Launcher, LauncherError
@@ -31,6 +32,13 @@ class LauncherTestCase(unittest.TestCase):
         self.options.config = 'thisdoesnotexist.json'
         with self.assertRaisesRegex(LauncherError, "Config file .* not found"):
             self.launcher.process_options(self.options)
+
+    def test_invalid_config_file(self):
+        with tempfile.NamedTemporaryFile() as temp_file:
+            temp_file.write(b"{")
+            self.options.config = temp_file.name
+            with self.assertRaisesRegex(LauncherError, "Config file '.*' is invalid JSON."):
+                self.launcher.process_options(self.options)
 
     def test_no_cwd(self):
         project = {
