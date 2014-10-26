@@ -1,6 +1,6 @@
 import unittest
 
-from gtlaunch.launcher import Launcher
+from gtlaunch.launcher import Launcher, LauncherError
 
 
 class MockOptions(object):
@@ -21,6 +21,11 @@ class LauncherTestCase(unittest.TestCase):
 
     def test_lazy_init(self):
         self.assertIsNone(self.launcher.project)
+
+    def test_no_config_file(self):
+        with self.assertRaisesRegex(LauncherError, "Config file .* not found"):
+            self.options.config = 'thisdoesnotexist.json'
+            self.launcher.process_options(self.options)
 
     def test_no_cwd(self):
         project = {
