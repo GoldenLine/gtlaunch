@@ -1,3 +1,4 @@
+========
 gtlaunch
 ========
 
@@ -24,3 +25,43 @@ gtlaunch
     :target: https://coveralls.io/r/zsiciarz/gtlaunch?branch=master
 
 Gnome Terminal launcher
+
+Installation
+------------
+
+The recommended way to install Python packages which provide executable scripts
+is to use `pipsi <https://github.com/mitsuhiko/pipsi>`_::
+
+    pipsi install gtlaunch
+
+But ``pip`` also works::
+
+    pip install gtlaunch
+
+Configuration
+-------------
+
+By default, ``gtlaunch`` reads its configuration from a ``gtlaunch.json`` file
+located in user's home directory. This can be overridden by passing the
+location of config file to ``--config`` option::
+
+    gtlaunch --config ../my-projects.json
+
+TODO: Add example config file with explanations
+
+Resources
+---------
+
+ * `Issue tracker <https://github.com/zsiciarz/gtlaunch/issues>`_
+ * `CI server <https://travis-ci.org/zsiciarz/gtlaunch>`_
+
+Author
+------
+
+ * `Zbigniew Siciarz <http://siciarz.net>`_ (zbigniew at siciarz dot net)
+
+License
+-------
+
+gtlaunch is free software, licensed under the MIT/X11 License. A copy of
+the license is provided with the source code in the LICENSE file.
