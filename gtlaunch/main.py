@@ -3,6 +3,7 @@
 import argparse
 import sys
 
+from gtlaunch import __version__
 from launcher import Launcher, LauncherError
 
 
@@ -15,6 +16,10 @@ def run():
     parser.add_argument(
         '-v', '--verbose', help="verbose output",
         action='store_true',
+    )
+    parser.add_argument(
+        '-V', '--version', action='version',
+        version='%%(prog)s %s' % __version__,
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
