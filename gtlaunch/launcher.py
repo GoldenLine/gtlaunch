@@ -38,6 +38,9 @@ class Launcher(object):
                 '--working-directory', os.path.expanduser(project['cwd']),
             ])
         for idx, tab in enumerate(project['tabs']):
+            if not isinstance(tab, dict):
+                # tab is probably just a string containing the initial command
+                tab = {'command': tab}
             tab_option = '--tab' if idx == 0 else '--tab-with-profile=Default'
             prefix = project.get('prefix', 'true')
             command = "zsh -is eval '{} && {}'".format(prefix, tab['command'])
