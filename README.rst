@@ -24,7 +24,9 @@ gtlaunch
 .. image:: https://coveralls.io/repos/zsiciarz/gtlaunch/badge.png?branch=master
     :target: https://coveralls.io/r/zsiciarz/gtlaunch?branch=master
 
-Gnome Terminal launcher
+``gtlaunch`` launches Gnome Terminal with predefined tabs, runs a command
+in each tab and leaves you in the shell if the command quits, so you can
+jump straight to work. See the demo:
 
 .. image:: http://zippy.gfycat.com/EarlyBlackGrub.gif
 
