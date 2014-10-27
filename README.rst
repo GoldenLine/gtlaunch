@@ -45,6 +45,16 @@ But ``pip`` also works::
 
     pip install gtlaunch
 
+Add the following to your ``.zshrc`` (see
+`this message <http://www.zsh.org/mla/users/2005/msg00599.html>`_ for an
+explanation::
+
+    if [[ $1 == eval ]]
+    then
+        "$@"
+        set --
+    fi
+
 Configuration
 -------------
 
