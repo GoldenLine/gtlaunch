@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.2.0
+=====
+
+* enabled simple tab configuration as just a list of commands
+* basic documentation in readme
+
 0.1.3
 =====
 
