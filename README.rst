@@ -47,7 +47,7 @@ But ``pip`` also works::
 
 Add the following to your ``.zshrc`` (see
 `this message <http://www.zsh.org/mla/users/2005/msg00599.html>`_ for an
-explanation::
+explanation)::
 
     if [[ $1 == eval ]]
     then
