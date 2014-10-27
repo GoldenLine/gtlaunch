@@ -47,7 +47,36 @@ location of config file to ``--config`` option::
 
     gtlaunch --config ../my-projects.json
 
-TODO: Add example config file with explanations
+Here's an example configuration file (note: JSON does not allow comments,
+these are just for reference)::
+
+    {
+        // The configuration is an object where keys are project names
+        // and values store per-project settings.
+        "simple_project": {
+            // The simplest setup is just a list of commands under the tabs key
+            "tabs": ["vim", "python", "git status"]
+        },
+        "more_options": {
+            // prefix specifies a command that will be run before each tab's
+            // command executes
+            "prefix": "workon test",
+            // you can specify working directory; ~ will be expanded
+            "cwd": "~/Development",
+            "tabs": [
+                // the extended format allows more options, see below
+                {
+                    // command is required
+                    "command": "vim",
+                    // title is optional, defaults to command
+                    "title": "editor"
+                },
+                // you can mix&match both formats
+                "python",
+                "git status"
+            ]
+        }
+    }
 
 Resources
 ---------
