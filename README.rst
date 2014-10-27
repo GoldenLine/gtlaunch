@@ -26,6 +26,13 @@ gtlaunch
 
 Gnome Terminal launcher
 
+Prerequisites
+-------------
+
+ * Linux with Gnome
+ * ZSH (support for other shells is in the works)
+ * Python 2.7 or 3.3+
+
 Installation
 ------------
 
