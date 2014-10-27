@@ -26,6 +26,8 @@ gtlaunch
 
 Gnome Terminal launcher
 
+.. image:: http://zippy.gfycat.com/EarlyBlackGrub.gif
+
 Prerequisites
 -------------
 
