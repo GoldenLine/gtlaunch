@@ -18,11 +18,11 @@ gtlaunch
     :target: https://pypi.python.org/pypi/gtlaunch/
     :alt: Wheel Status
 
-.. image:: https://travis-ci.org/zsiciarz/gtlaunch.svg?branch=master
-    :target: https://travis-ci.org/zsiciarz/gtlaunch
+.. image:: https://travis-ci.org/GoldenLine/gtlaunch.svg?branch=master
+    :target: https://travis-ci.org/GoldenLine/gtlaunch
 
-.. image:: https://coveralls.io/repos/zsiciarz/gtlaunch/badge.png?branch=master
-    :target: https://coveralls.io/r/zsiciarz/gtlaunch?branch=master
+.. image:: https://coveralls.io/repos/GoldenLine/gtlaunch/badge.png?branch=master
+    :target: https://coveralls.io/r/GoldenLine/gtlaunch?branch=master
 
 ``gtlaunch`` launches Gnome Terminal with predefined tabs, runs a command
 in each tab and leaves you in the shell if the command quits, so you can
