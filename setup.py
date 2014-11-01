@@ -26,6 +26,8 @@ setup(
     },
     classifiers=[
         'Development Status :: 4 - Beta',
+        'Environment :: X11 Applications',
+        'Environment :: X11 Applications :: Gnome',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
